@@ -2348,8 +2348,6 @@
 
 
 
-
-
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 /* Layout extracted from CHICHOLI-100.dxf — 211 plots, road network,
    2 open spaces, amenity space, 2 HTL corridors, WWTP.
@@ -2570,7 +2568,7 @@ function midOfPolyline(poly) {
   };
 }
 
-function DimensionOverlay({ plot }) {
+function DimensionOverlay({ plot, matrix }) {
   const c = centroid(plot.pts);
   const ir = plot.ir;
 
@@ -2593,7 +2591,7 @@ function DimensionOverlay({ plot }) {
   const runs = buildRuns(plot.pts, plot.sides, c);
 
   return (
-    <g style={{ pointerEvents: 'none' }}>
+    <g transform={matrix} style={{ pointerEvents: 'none' }}>
       {runs.map((run, ri) => {
         const poly = offsetRun(run, off);
         const first = run.segs[0];
@@ -2667,11 +2665,108 @@ function DimensionOverlay({ plot }) {
 
 /* ---------------------------------------------------------------
    Map.
-   Input runs on Pointer Events, so mouse, touch and pen all take the
-   same path: one pointer pans, two pinch-zoom about their midpoint,
-   the wheel zooms about the cursor. On-screen buttons cover devices
-   with neither a wheel nor multi-touch.
+
+   The plan is drawn once, in 2D, and the whole thing is projected onto a
+   tilted, turning ground plane. Because an orthographic projection of a
+   plane is an affine map, that is a single SVG matrix wrapped around the
+   existing artwork — every plot, road name, number and dimension rotates
+   together and stays crisp vector, with no second renderer to keep in sync.
+   At tilt 0 the matrix is the identity, so the resting view is exactly the
+   flat plan.
+
+   The selected plot is the one thing with height: its footprint is lifted by
+   H·sin(tilt) on screen and the side walls are drawn between base and top,
+   far walls first.
+
+     one finger / left drag ...... pan
+     two fingers ................. pinch to zoom, twist to turn, slide to tilt
+     wheel ....................... zoom
 --------------------------------------------------------------- */
+const LIFT_H = 3.0;            // metres the selected plot stands proud
+const REST_TILT = 0.72;        // radians it settles at once raised
+
+/** orthographic projection of the ground plane, as an SVG matrix */
+function groundMatrix(spin, tilt, pivot) {
+  const cs = Math.cos(spin), sn = Math.sin(spin), ct = Math.cos(tilt);
+  const a = cs, c = sn, b = -sn * ct, d = cs * ct;
+  const [px, pz] = pivot;
+  const e = px - (a * px + c * pz);
+  const f = pz - (b * px + d * pz);
+  return {
+    str: `matrix(${a.toFixed(6)} ${b.toFixed(6)} ${c.toFixed(6)} ${d.toFixed(6)} ${e.toFixed(4)} ${f.toFixed(4)})`,
+    apply: (p) => [a * p[0] + c * p[1] + e, b * p[0] + d * p[1] + f],
+    depth: (p) => -p[0] * sn + p[1] * cs,      // larger = nearer the viewer
+  };
+}
+
+/** every flat thing on the plan; memoised so a turning matrix costs one attribute */
+const PlanContent = React.memo(function PlanContent({
+  selected, matches, status, showNumbers, strokeW, numberSize, roadSize, areaSize, hover, setHover, onPick,
+}) {
+  return (
+    <g>
+      {SORTED.map((f) => {
+        const k = KIND[f.kind];
+        const isPlot = f.kind === 'plot';
+        const isSel = isPlot && selected === f.name;
+        const dim = isPlot && matches && !matches.has(f.name);
+        let fill = k.fill;
+        if (isPlot) {
+          const st = STATUS[status[f.name] || 'available'];
+          fill = st.tones ? toneOf(f.name) : st.fill;
+        }
+        if (isSel) fill = '#241A28';        // the socket the raised plot came out of
+        return (
+          <path
+            key={f.i}
+            d={pathWithHoles(f.pts, f.holes)}
+            fill={fill}
+            fillRule="evenodd"
+            stroke={isSel ? '#3A2B40' : k.stroke}
+            strokeWidth={strokeW}
+            opacity={dim ? 0.22 : hover === f.name && isPlot ? 0.86 : 1}
+            onMouseEnter={() => isPlot && setHover(f.name)}
+            onClick={() => isPlot && onPick(f.name)}
+            style={{ cursor: isPlot ? 'pointer' : 'grab' }}
+          />
+        );
+      })}
+
+      {showNumbers && PLOTS.map((f) => {
+        if (matches && !matches.has(f.name)) return null;
+        if (f.name === selected) return null;
+        const size = fittedNumberSize(f, numberSize);
+        if (size < 0.9) return null;
+        return (
+          <text key={`n${f.i}`} x={f.lp[0]} y={f.lp[1]} textAnchor="middle" dy="0.35em"
+            fontFamily={MAPFONT} fontSize={size} fontWeight="600" fill="#000000"
+            style={{ pointerEvents: 'none' }}>{f.name}</text>
+        );
+      })}
+
+      {LAYOUT.roadLabels.map((r, i) => (
+        <text key={`r${i}`} x={r.p[0]} y={r.p[1]}
+          transform={`rotate(${r.a} ${r.p[0]} ${r.p[1]})`}
+          textAnchor="middle" dy="0.35em"
+          fontFamily={MAPFONT} fontSize={roadSize} fontWeight="500" fill="#C9CED4"
+          style={{ pointerEvents: 'none' }}>{roadLabelText(r)}</text>
+      ))}
+
+      {LAYOUT.areaLabels.map((a, i) => (
+        <g key={`a${i}`} style={{ pointerEvents: 'none' }}>
+          <text x={a.p[0]} y={a.p[1] - areaSize * 0.35} textAnchor="middle" dy="0.35em"
+            fontFamily={SANS} fontSize={areaSize} letterSpacing="0.14em"
+            fill={KIND[a.kind].ink} fontWeight="600">{a.name}</text>
+          <text x={a.p[0]} y={a.p[1] + areaSize * 0.85} textAnchor="middle" dy="0.35em"
+            fontFamily={MONO} fontSize={areaSize * 0.62} fill={KIND[a.kind].ink} opacity="0.85">
+            {a.area.toLocaleString('en-IN')} m²
+          </text>
+        </g>
+      ))}
+    </g>
+  );
+});
+
 function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbers }) {
   const svgRef = useRef(null);
   const pointers = useRef(new Map());
@@ -2679,9 +2774,40 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
   const moved = useRef(false);
   const [hover, setHover] = useState(null);
 
-  const rect = () => svgRef.current.getBoundingClientRect();
+  /* Live camera, mirrored into state so the matrix attribute re-renders.
+     It turns on its own, but any drag takes over immediately and the auto
+     turn only picks up again once you have been still for a moment. */
+  const cam = useRef({ spin: 0, tilt: 0 });
+  const [pose, setPose] = useState({ spin: 0, tilt: 0 });
+  const [autoTurn, setAutoTurn] = useState(true);
+  const autoRef = useRef(true);
+  const touched = useRef(0);
+  useEffect(() => { autoRef.current = autoTurn; }, [autoTurn]);
+  const RESUME_AFTER = 1500;   // ms of stillness before it starts turning again
 
-  /* zoom about a point given as a fraction of the viewport */
+  const selFeature = selected ? BY_NAME.get(selected) : null;
+  const wantTilt = selFeature ? REST_TILT : 0;
+
+  useEffect(() => {
+    let raf;
+    const step = () => {
+      raf = requestAnimationFrame(step);
+      const k = cam.current;
+      const dt = wantTilt - k.tilt;
+      let changed = false;
+      if (Math.abs(dt) > 0.0015) { k.tilt += dt * 0.12; changed = true; }
+      else if (k.tilt !== wantTilt) { k.tilt = wantTilt; changed = true; }
+      if (selFeature && autoRef.current && !gesture.current
+          && Date.now() - touched.current > RESUME_AFTER) {
+        k.spin += 0.0035; changed = true;
+      }
+      if (!selFeature && k.spin !== 0) { k.spin *= 0.88; if (Math.abs(k.spin) < 0.002) k.spin = 0; changed = true; }
+      if (changed) setPose({ spin: k.spin, tilt: k.tilt });
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [wantTilt, selFeature]);
+
   const zoomAbout = useCallback((factor, fx, fy) => {
     setView((v) => {
       const w = clamp(v.w * factor, MIN_SPAN, MAX_SPAN);
@@ -2690,12 +2816,12 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
     });
   }, [setView]);
 
-  /* wheel needs a non-passive listener to be able to preventDefault */
   useEffect(() => {
     const el = svgRef.current;
     if (!el) return;
     const onWheel = (e) => {
       e.preventDefault();
+      touched.current = Date.now();
       const r = el.getBoundingClientRect();
       zoomAbout(e.deltaY > 0 ? 1.12 : 1 / 1.12,
         (e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
@@ -2704,19 +2830,27 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
     return () => el.removeEventListener('wheel', onWheel);
   }, [zoomAbout]);
 
+  const twoFinger = () => {
+    const [a, b] = [...pointers.current.values()];
+    return {
+      dist: Math.hypot(a.x - b.x, a.y - b.y) || 1,
+      ang: Math.atan2(b.y - a.y, b.x - a.x),
+      my: (a.y + b.y) / 2,
+    };
+  };
+
   const onPointerDown = (e) => {
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
     moved.current = false;
+    touched.current = Date.now();
     const ps = [...pointers.current.values()];
     if (ps.length === 1) {
-      gesture.current = { mode: 'pan', sx: e.clientX, sy: e.clientY, view };
+      gesture.current = selFeature
+        ? { mode: 'orbit', sx: e.clientX, sy: e.clientY, spin: cam.current.spin, tilt: cam.current.tilt }
+        : { mode: 'pan', sx: e.clientX, sy: e.clientY, view };
     } else if (ps.length === 2) {
-      const [a, b] = ps;
-      gesture.current = {
-        mode: 'pinch', view,
-        dist: Math.hypot(a.x - b.x, a.y - b.y) || 1,
-        mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2,
-      };
+      gesture.current = { mode: 'multi', view, ...twoFinger(),
+        spin: cam.current.spin, tilt: cam.current.tilt };
     }
   };
 
@@ -2726,10 +2860,17 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
       pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
       const g = gesture.current;
       if (!g || !svgRef.current) return;
-      const r = rect();
+      touched.current = Date.now();
+      const r = svgRef.current.getBoundingClientRect();
       const ps = [...pointers.current.values()];
 
-      if (g.mode === 'pan' && ps.length === 1) {
+      if (g.mode === 'orbit' && ps.length === 1) {
+        const px = e.clientX - g.sx, py = e.clientY - g.sy;
+        if (Math.abs(px) > 4 || Math.abs(py) > 4) moved.current = true;
+        cam.current.spin = g.spin + px * 0.007;                   // drag across to turn
+        cam.current.tilt = Math.min(1.15, Math.max(0, g.tilt - py * 0.005));
+        setPose({ spin: cam.current.spin, tilt: cam.current.tilt });
+      } else if (g.mode === 'pan' && ps.length === 1) {
         const px = e.clientX - g.sx, py = e.clientY - g.sy;
         if (Math.abs(px) > 4 || Math.abs(py) > 4) moved.current = true;
         setView({
@@ -2737,27 +2878,34 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
           x: g.view.x - (px / r.width) * g.view.w,
           y: g.view.y - (py / r.height) * g.view.h,
         });
-      } else if (g.mode === 'pinch' && ps.length >= 2) {
-        const [a, b] = ps;
-        const dist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
-        const w = clamp(g.view.w * (g.dist / dist), MIN_SPAN, MAX_SPAN);
-        const h = w * (g.view.h / g.view.w);
-        const fx = (g.mx - r.left) / r.width;
-        const fy = (g.my - r.top) / r.height;
+      } else if (g.mode === 'multi' && ps.length >= 2) {
         moved.current = true;
-        setView({ x: g.view.x + (g.view.w - w) * fx, y: g.view.y + (g.view.h - h) * fy, w, h });
+        const t = twoFinger();
+
+        const w = clamp(g.view.w * (g.dist / t.dist), MIN_SPAN, MAX_SPAN);
+        const h = w * (g.view.h / g.view.w);
+        setView({ x: g.view.x + (g.view.w - w) / 2, y: g.view.y + (g.view.h - h) / 2, w, h });
+
+        let da = t.ang - g.ang;                       // twist turns the layout
+        while (da > Math.PI) da -= Math.PI * 2;
+        while (da < -Math.PI) da += Math.PI * 2;
+        cam.current.spin = g.spin + da;
+
+        // sliding both fingers up and down tips the plan
+        cam.current.tilt = Math.min(1.15, Math.max(0, g.tilt + (t.my - g.my) * 0.004));
+        setPose({ spin: cam.current.spin, tilt: cam.current.tilt });
       }
     };
 
     const onUp = (e) => {
       pointers.current.delete(e.pointerId);
+      touched.current = Date.now();
       const ps = [...pointers.current.values()];
       if (ps.length === 1) {
-        // second finger lifted — carry on panning from where the first one is
-        gesture.current = { mode: 'pan', sx: ps[0].x, sy: ps[0].y, view };
-      } else if (ps.length === 0) {
-        gesture.current = null;
-      }
+        gesture.current = selFeature
+          ? { mode: 'orbit', sx: ps[0].x, sy: ps[0].y, spin: cam.current.spin, tilt: cam.current.tilt }
+          : { mode: 'pan', sx: ps[0].x, sy: ps[0].y, view };
+      } else if (ps.length === 0) gesture.current = null;
     };
 
     window.addEventListener('pointermove', onMove);
@@ -2768,19 +2916,39 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
       window.removeEventListener('pointerup', onUp);
       window.removeEventListener('pointercancel', onUp);
     };
-  }, [setView, view]);
+  }, [setView, view, selFeature]);
 
   const zoom = META.w / view.w;
-  const preferredNumberSize = Math.min(4.2, Math.max(1.4, 3.0 / Math.pow(zoom, 0.45)));
+  const numberSize = Math.min(4.2, Math.max(1.4, 3.0 / Math.pow(zoom, 0.45)));
+  const roadSize = Math.max(1.5, 2.9 / Math.sqrt(zoom));
+  const areaSize = Math.max(2.2, 4.2 / Math.sqrt(zoom));
   const strokeW = 0.35 / Math.sqrt(zoom);
-  const selFeature = selected ? BY_NAME.get(selected) : null;
 
-  const zoomBtn = {
-    width: 40, height: 40, borderRadius: 10, cursor: 'pointer',
-    background: PANEL, border: `1px solid ${HAIR}`, color: '#D7DCE2',
-    fontFamily: BODY, fontSize: 19, fontWeight: 600, lineHeight: 1,
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+  const pivot = selFeature ? centroid(selFeature.pts) : [view.x + view.w / 2, view.y + view.h / 2];
+  const M = groundMatrix(pose.spin, pose.tilt, pivot);
+  const rise = LIFT_H * Math.sin(pose.tilt);
+
+  /* the raised plot: base, sorted side walls, then the top face */
+  let walls = null;
+  if (selFeature && rise > 0.05) {
+    const pts = selFeature.pts;
+    const base = pts.map(M.apply);
+    const top = base.map(([x, y]) => [x, y - rise]);
+    walls = pts.map((p, i) => {
+      const j = (i + 1) % pts.length;
+      return {
+        i,
+        depth: (M.depth(p) + M.depth(pts[j])) / 2,
+        d: `M${base[i][0]} ${base[i][1]}L${base[j][0]} ${base[j][1]}L${top[j][0]} ${top[j][1]}L${top[i][0]} ${top[i][1]}Z`,
+      };
+    }).sort((a, b) => a.depth - b.depth);
+  }
+
+  const btn = {
+    width: 40, height: 40, borderRadius: 10, cursor: 'pointer', background: PANEL,
+    border: `1px solid ${HAIR}`, color: '#D7DCE2', fontFamily: BODY, fontSize: 17,
+    fontWeight: 600, lineHeight: 1, display: 'flex', alignItems: 'center',
+    justifyContent: 'center', touchAction: 'manipulation',
   };
 
   return (
@@ -2802,87 +2970,49 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
         </defs>
         <rect x={-500} y={-500} width={META.w + 1000} height={META.h + 1000} fill="url(#chicholi-grid)" />
 
-        {SORTED.map((f) => {
-          const k = KIND[f.kind];
-          const isPlot = f.kind === 'plot';
-          const isSel = isPlot && selected === f.name;
-          const dim = isPlot && matches && !matches.has(f.name);
-          let fill = k.fill;
-          if (isPlot) {
-            const st = STATUS[status[f.name] || 'available'];
-            fill = st.tones ? toneOf(f.name) : st.fill;
-          }
-          if (isSel) fill = SELECTED_FILL;
-          return (
-            <path
-              key={f.i}
-              d={pathWithHoles(f.pts, f.holes)}
-              fill={fill}
-              fillRule="evenodd"
-              stroke={isSel ? SELECTED_EDGE : k.stroke}
-              strokeWidth={isSel ? strokeW * 3.4 : strokeW}
-              opacity={dim ? 0.22 : hover === f.name && isPlot ? 0.86 : 1}
-              onMouseEnter={() => isPlot && setHover(f.name)}
-              onClick={() => {
-                if (moved.current || !isPlot) return;
-                onSelect(f.name === selected ? null : f.name);
-              }}
-              style={{ cursor: isPlot ? 'pointer' : 'grab' }}
-            />
-          );
-        })}
+        <g transform={M.str}>
+          <PlanContent
+            selected={selected} matches={matches} status={status} showNumbers={showNumbers}
+            strokeW={strokeW} numberSize={numberSize} roadSize={roadSize} areaSize={areaSize}
+            hover={hover} setHover={setHover}
+            onPick={(name) => { if (!moved.current) onSelect(name === selected ? null : name); }}
+          />
+        </g>
 
-        {showNumbers && PLOTS.map((f) => {
-          if (matches && !matches.has(f.name)) return null;
-          if (f.name === selected) return null;      // the overlay draws this one
-          const size = fittedNumberSize(f, preferredNumberSize);
-          if (size < 0.9) return null;
-          return (
-            <text
-              key={`n${f.i}`}
-              x={f.lp[0]} y={f.lp[1]}
-              textAnchor="middle" dy="0.35em"
-              fontFamily={MAPFONT} fontSize={size} fontWeight="600" fill="#000000"
-              style={{ pointerEvents: 'none' }}
-            >{f.name}</text>
-          );
-        })}
+        {selFeature && pose.tilt > 0.02 && (
+          <rect x={-2000} y={-2000} width={META.w + 4000} height={META.h + 4000}
+            fill="rgba(10,13,18,0.5)" style={{ pointerEvents: 'none' }} />
+        )}
 
-        {selFeature && <DimensionOverlay plot={selFeature} />}
-
-        {LAYOUT.roadLabels.map((r, i) => (
-          <text
-            key={`r${i}`}
-            x={r.p[0]} y={r.p[1]}
-            transform={`rotate(${r.a} ${r.p[0]} ${r.p[1]})`}
-            textAnchor="middle" dy="0.35em"
-            fontFamily={MAPFONT} fontSize={Math.max(1.5, 2.9 / Math.sqrt(zoom))}
-            fontWeight="500" fill="#C9CED4"
-            style={{ pointerEvents: 'none' }}
-          >{roadLabelText(r)}</text>
+        {walls && walls.map((w) => (
+          <path key={`w${w.i}`} d={w.d} fill="#6E2680" stroke="#4E1B5C"
+            strokeWidth={strokeW} style={{ pointerEvents: 'none' }} />
         ))}
 
-        {LAYOUT.areaLabels.map((a, i) => {
-          const fs = Math.max(2.2, 4.2 / Math.sqrt(zoom));
-          return (
-            <g key={`a${i}`} style={{ pointerEvents: 'none' }}>
-              <text x={a.p[0]} y={a.p[1] - fs * 0.35} textAnchor="middle" dy="0.35em"
-                fontFamily={SANS} fontSize={fs} letterSpacing="0.14em"
-                fill={KIND[a.kind].ink} fontWeight="600">{a.name}</text>
-              <text x={a.p[0]} y={a.p[1] + fs * 0.85} textAnchor="middle" dy="0.35em"
-                fontFamily={MONO} fontSize={fs * 0.62} fill={KIND[a.kind].ink} opacity="0.85">
-                {a.area.toLocaleString('en-IN')} m²
-              </text>
+        {selFeature && (
+          <g transform={`translate(0 ${-rise})`} style={{ pointerEvents: 'none' }}>
+            <g transform={M.str}>
+              <path d={pathWithHoles(selFeature.pts)} fill={SELECTED_FILL}
+                stroke="#E9C6F2" strokeWidth={strokeW * 2.4} />
             </g>
-          );
-        })}
+            <DimensionOverlay plot={selFeature} matrix={M.str} />
+          </g>
+        )}
       </svg>
 
-      {/* works where there is no wheel and no pinch */}
       <div className="zoom-pad" style={{ position: 'absolute', left: 14, bottom: 14, zIndex: 11,
         display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <button aria-label="Zoom in" style={zoomBtn} onClick={() => zoomAbout(1 / 1.35, 0.5, 0.5)}>+</button>
-        <button aria-label="Zoom out" style={zoomBtn} onClick={() => zoomAbout(1.35, 0.5, 0.5)}>−</button>
+        <button aria-label="Zoom in" style={btn} onClick={() => zoomAbout(1 / 1.35, 0.5, 0.5)}>+</button>
+        <button aria-label="Zoom out" style={btn} onClick={() => zoomAbout(1.35, 0.5, 0.5)}>−</button>
+        {selFeature && (
+          <>
+            <button aria-label="Turn automatically" style={{ ...btn, fontSize: 13,
+              borderColor: autoTurn ? ACCENT : HAIR, color: autoTurn ? ACCENT : '#D7DCE2' }}
+              onClick={() => { touched.current = 0; setAutoTurn((v) => !v); }}>360</button>
+            <button aria-label="Face north" style={{ ...btn, fontSize: 13 }}
+              onClick={() => { cam.current.spin = 0; touched.current = Date.now(); setPose({ ...cam.current }); }}>N</button>
+          </>
+        )}
       </div>
     </>
   );

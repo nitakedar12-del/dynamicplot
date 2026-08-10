@@ -12,7 +12,7 @@ import React from 'react';
 
 // import './App.css';
 import PlotLayoutViewer from './Components/Plotlayoutviewer';
-import ChicholiMasterPlan from './Components/Chicholimasterplan';
+
 
 /**
  * App - Root application component

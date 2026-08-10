@@ -2346,7 +2346,6 @@
 
 
 
-
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 /* Layout extracted from CHICHOLI-100.dxf — 211 plots, road network,
    2 open spaces, amenity space, 2 HTL corridors, WWTP.
@@ -2778,8 +2777,8 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
      turn only picks up again once you have been still for a moment. */
   const cam = useRef({ spin: 0, tilt: 0 });
   const [pose, setPose] = useState({ spin: 0, tilt: 0 });
-  const [autoTurn, setAutoTurn] = useState(true);
-  const autoRef = useRef(true);
+  const [autoTurn, setAutoTurn] = useState(false);   // off unless you ask for it
+  const autoRef = useRef(false);
   const touched = useRef(0);
   useEffect(() => { autoRef.current = autoTurn; }, [autoTurn]);
   const RESUME_AFTER = 1500;   // ms of stillness before it starts turning again

@@ -2347,7 +2347,6 @@
 
 
 
-
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 /* Layout extracted from CHICHOLI-100.dxf — 211 plots, road network,
    2 open spaces, amenity space, 2 HTL corridors, WWTP.
@@ -3002,8 +3001,11 @@ function PlanMap({ view, setView, selected, onSelect, matches, status, showNumbe
 
       <div className="zoom-pad" style={{ position: 'absolute', left: 14, bottom: 14, zIndex: 11,
         display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <button aria-label="Zoom in" style={btn} onClick={() => zoomAbout(1 / 1.35, 0.5, 0.5)}>+</button>
-        <button aria-label="Zoom out" style={btn} onClick={() => zoomAbout(1.35, 0.5, 0.5)}>−</button>
+        {/* pinch covers this on touch, so the steppers are desktop-only */}
+        <div className="zoom-steps" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <button aria-label="Zoom in" style={btn} onClick={() => zoomAbout(1 / 1.35, 0.5, 0.5)}>+</button>
+          <button aria-label="Zoom out" style={btn} onClick={() => zoomAbout(1.35, 0.5, 0.5)}>−</button>
+        </div>
         {selFeature && (
           <>
             <button aria-label="Turn automatically" style={{ ...btn, fontSize: 13,
@@ -3463,6 +3465,7 @@ export default function ChicholiMasterPlan() {
           .toolbar .spacer { margin-left: 6px; }
           .toolbar .area-label { display: none; }
           .zoom-pad { bottom: calc(38vh + 16px) !important; }
+          .zoom-steps { display: none !important; }
         }
       `}</style>
 

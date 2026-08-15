@@ -3,7 +3,7 @@ import { ArrowUpRight, Maximize2 } from "lucide-react";
 
 import styles from "./Demo.module.css";
 
-const DEMO_URL = "https://dynamicplot.vercel.app/";
+const DEMO_URL = "https://www.plotlayout.land/demo";
 
 const Demo = () => {
   const handleFullscreen = async () => {

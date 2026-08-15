@@ -1,0 +1,679 @@
+/* =========================================
+   SECTION
+========================================= */
+
+.section {
+  position: relative;
+  width: 100%;
+
+  /* padding: 130px 0 150px; */
+  padding: 90px 0 100px;
+
+  overflow: hidden;
+
+  background: var(--color-white);
+}
+
+.container {
+  width: min(1380px, calc(100% - 100px));
+  margin: 0 auto;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+  /* max-width: 760px;
+  margin-bottom: 80px; */
+  max-width: 760px;
+  margin-bottom: 55px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  color: var(--color-orange);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+
+  width: 26px;
+  height: 2px;
+
+  background: var(--color-orange);
+}
+
+.header h2 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: clamp(48px, 5.5vw, 78px);
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+  font-weight: 800;
+}
+
+.header h2 span {
+  color: var(--color-orange);
+}
+
+.header p {
+  max-width: 620px;
+
+  margin: 28px 0 0;
+
+  color: #71859a;
+
+  font-size: 16px;
+  line-height: 1.6;
+
+  font-weight: 500;
+}
+
+/* =========================================
+   FEATURE GRID
+========================================= */
+
+.featureGrid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(360px, 0.82fr)
+    minmax(520px, 1.18fr);
+
+  gap: clamp(40px, 5vw, 75px);
+
+  align-items: center;
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.content {
+  max-width: 540px;
+}
+
+.intro {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.iconBox {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 14px;
+
+  background: rgba(242, 106, 27, 0.1);
+
+  color: var(--color-orange);
+}
+
+.intro div:last-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.intro span {
+  color: #8b9cad;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+}
+
+.intro strong {
+  color: var(--color-navy);
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.content h3 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: clamp(35px, 3.4vw, 54px);
+  line-height: 1.03;
+
+  letter-spacing: -0.045em;
+
+  font-weight: 800;
+}
+
+.content h3 span {
+  color: var(--color-orange);
+}
+
+.description {
+  max-width: 500px;
+
+  margin: 18px 0 28px;
+
+  color: #72859a;
+
+  font-size: 15px;
+  line-height: 1.65;
+
+  font-weight: 500;
+}
+
+/* =========================================
+   FEATURE LIST
+========================================= */
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+
+  margin-bottom: 28px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 14px;
+}
+
+.featureIcon {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  border-radius: 9px;
+
+  background: #f6f8fa;
+
+  color: var(--color-orange);
+}
+
+.featureItem h4 {
+  margin: 0 0 4px;
+
+  color: var(--color-navy);
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.featureItem p {
+  margin: 0;
+
+  color: #8999aa;
+
+  font-size: 12px;
+  line-height: 1.45;
+
+  font-weight: 500;
+}
+
+/* =========================================
+   CTA
+========================================= */
+
+.cta {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 6px 6px 6px 18px;
+
+  border-radius: 999px;
+
+  background: var(--color-navy);
+
+  color: var(--color-white);
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-shadow: 0 12px 28px rgba(6, 37, 64, 0.12);
+
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.cta:hover {
+  background: var(--color-orange);
+
+  box-shadow: 0 14px 30px rgba(242, 106, 27, 0.2);
+}
+
+.ctaIcon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  color: var(--color-white);
+
+  transition: transform 0.3s ease;
+}
+
+.cta:hover .ctaIcon {
+  transform: rotate(45deg);
+}
+
+/* =========================================
+   VISUAL
+========================================= */
+
+.visualWrapper {
+  position: relative;
+
+  min-width: 0;
+}
+
+.visual {
+  position: relative;
+
+  min-height: 540px;
+
+  overflow: hidden;
+
+  border-radius: 32px;
+
+  background: linear-gradient(135deg, #062540 0%, #0b304b 55%, #092942 100%);
+
+  box-shadow: 0 35px 80px rgba(6, 37, 64, 0.18);
+}
+
+/* =========================================
+   GRID BACKGROUND
+========================================= */
+
+.gridPattern {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.18;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+
+  background-size: 42px 42px;
+
+  pointer-events: none;
+}
+
+/* =========================================
+   MAP FRAME
+========================================= */
+
+.mapFrame {
+  position: absolute;
+
+  top: 5%;
+  right: 4%;
+  bottom: 5%;
+  left: 4%;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 24px;
+
+  background: #173d56;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
+}
+
+.mapFrame img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter: saturate(0.95);
+
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mapFrame:hover img {
+  transform: scale(1.025);
+}
+
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    rgba(6, 37, 64, 0.04),
+    rgba(6, 37, 64, 0.12)
+  );
+
+  pointer-events: none;
+}
+
+/* =========================================
+   LIVE BADGE
+========================================= */
+
+.liveBadge {
+  position: absolute;
+
+  top: 30px;
+  left: 30px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 999px;
+
+  background: rgba(6, 37, 64, 0.88);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: var(--color-white);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  box-shadow: 0 0 0 5px rgba(242, 106, 27, 0.16);
+}
+
+/* =========================================
+   LOCATION BADGE
+========================================= */
+
+.locationBadge {
+  position: absolute;
+
+  right: 28px;
+  bottom: 28px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 12px 16px 12px 12px;
+
+  border: 1px solid rgba(6, 37, 64, 0.08);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.locationIcon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(242, 106, 27, 0.1);
+
+  color: var(--color-orange);
+}
+
+.locationBadge div:last-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.locationBadge span {
+  color: #8b9cad;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.locationBadge strong {
+  color: var(--color-navy);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+  .container {
+    width: min(100% - 60px, 900px);
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+
+    gap: 65px;
+  }
+
+  .content {
+    max-width: 700px;
+  }
+
+  .description {
+    max-width: 650px;
+  }
+
+  .visual {
+    min-height: 600px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .section {
+    padding: 90px 0 100px;
+  }
+
+  .container {
+    width: calc(100% - 36px);
+  }
+
+  .header {
+    margin-bottom: 50px;
+  }
+
+  .header h2 {
+    font-size: clamp(42px, 12vw, 58px);
+  }
+
+  .header p {
+    margin-top: 20px;
+
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .featureGrid {
+    gap: 48px;
+  }
+
+  .content h3 {
+    font-size: 38px;
+  }
+
+  .description {
+    font-size: 15px;
+
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .featureList {
+    gap: 18px;
+
+    margin-bottom: 30px;
+  }
+
+  .featureItem p {
+    font-size: 12px;
+  }
+
+  .visual {
+    min-height: 470px;
+
+    border-radius: 24px;
+  }
+
+  .mapFrame {
+    top: 6%;
+    right: 4%;
+    bottom: 6%;
+    left: 4%;
+
+    border-radius: 18px;
+  }
+
+  .liveBadge {
+    top: 20px;
+    left: 20px;
+
+    padding: 8px 11px;
+
+    font-size: 9px;
+  }
+
+  .locationBadge {
+    right: 18px;
+    bottom: 18px;
+
+    padding: 9px 12px 9px 9px;
+
+    border-radius: 13px;
+  }
+
+  .locationIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .locationBadge strong {
+    font-size: 11px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .section {
+    padding-top: 75px;
+  }
+
+  .content h3 {
+    font-size: 34px;
+  }
+
+  .visual {
+    min-height: 400px;
+  }
+
+  .locationBadge {
+    right: 12px;
+    bottom: 12px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .mapFrame,
+  .mapFrame img,
+  .cta,
+  .ctaIcon {
+    transition: none;
+  }
+}

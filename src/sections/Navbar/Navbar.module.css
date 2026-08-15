@@ -1,0 +1,608 @@
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  z-index: 1000;
+
+  width: 100%;
+  height: 108px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 40px;
+
+  pointer-events: none;
+
+  transition:
+    height 0.35s ease,
+    padding 0.35s ease,
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.brand {
+  position: relative;
+  z-index: 2;
+
+  width: 240px;
+  height: 108px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  flex-shrink: 0;
+
+  pointer-events: auto;
+
+  text-decoration: none;
+
+  transition: transform 0.3s ease;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+}
+
+.brand img {
+  position: relative;
+
+  display: block;
+  margin-right: 100px;
+  width: 350px;
+  height: 160px;
+
+  object-fit: contain;
+
+  /* Keep original logo appearance */
+  mix-blend-mode: normal;
+
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
+}
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  padding: 7px;
+
+  border: 1px solid rgba(6, 37, 64, 0.1);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  box-shadow: 0 8px 28px rgba(6, 37, 64, 0.08);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  pointer-events: auto;
+
+  transition:
+    padding 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* =====================================================
+   WATCH DEMO
+===================================================== */
+
+.watchButton {
+  height: 34px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 16px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: var(--color-navy);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.watchButton:hover {
+  color: var(--color-orange);
+
+  background: rgba(242, 106, 27, 0.06);
+
+  transform: translateY(-1px);
+}
+
+.watchIcon {
+  width: 15px;
+  height: 15px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   BOOK DEMO
+===================================================== */
+
+.bookButton {
+  height: 34px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 5px 0 21px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: var(--color-navy);
+
+  color: var(--color-white);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-shadow: 0 7px 18px rgba(6, 37, 64, 0.11);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.bookButton:hover {
+  background: var(--color-orange);
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 10px 24px rgba(242, 106, 27, 0.17);
+}
+
+.bookArrow {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  color: var(--color-white);
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.bookButton:hover .bookArrow {
+  transform: rotate(45deg) scale(1.04);
+
+  background: var(--color-white);
+
+  color: var(--color-orange);
+}
+
+/* =====================================================
+   FOCUS STATES
+===================================================== */
+
+.watchButton:focus-visible,
+.bookButton:focus-visible,
+.brand:focus-visible {
+  outline: 2px solid var(--color-orange);
+
+  outline-offset: 3px;
+}
+
+/* =====================================================
+   SCROLLED STATE
+===================================================== */
+/* 
+.navbar.scrolled {
+  height: 82px;
+
+  padding-left: 40px;
+  padding-right: 40px;
+} */
+
+/* .navbar.scrolled .brand {
+  
+  width: 300px;
+  height: 140px;
+} */
+
+/* .navbar.scrolled .actions {
+  padding: 5px;
+
+  box-shadow: 0 10px 28px rgba(6, 37, 64, 0.1);
+} */
+
+/* .navbar.scrolled .watchButton,
+.navbar.scrolled .bookButton {
+  height: 40px;
+
+  font-size: 12px;
+}
+
+.navbar.scrolled .bookArrow {
+  width: 32px;
+  height: 32px;
+} */
+
+/* =====================================================
+   VISIBILITY
+===================================================== */
+
+.navbar.visible {
+  transform: translateY(0);
+
+  opacity: 1;
+}
+
+.navbar.hidden {
+  transform: translateY(-120%);
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+  .navbar {
+    height: 96px;
+
+    padding: 0 28px;
+  }
+
+  /* .navbar.scrolled {
+    height: 76px;
+
+    padding-left: 28px;
+    padding-right: 28px;
+  } */
+
+  .brand {
+    margin-top: 10px;
+    width: 175px;
+    height: 82px;
+  }
+
+  /* .navbar.scrolled .brand {
+    width: 150px;
+    height: 64px;
+  } */
+
+  .watchButton,
+  .bookButton {
+    height: 42px;
+
+    font-size: 12px;
+  }
+
+  .watchButton {
+    padding: 0 18px;
+  }
+
+  .bookButton {
+    padding-left: 18px;
+  }
+
+  .bookArrow {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 800px) {
+  .navbar {
+    height: 88px;
+
+    padding: 0 20px;
+  }
+
+  /* .navbar.scrolled {
+    height: 70px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+  } */
+
+  .brand {
+    margin-top: 10px;
+    width: 155px;
+    height: 74px;
+  }
+
+  /* .navbar.scrolled .brand {
+    width: 140px;
+    height: 60px;
+  } */
+
+  .watchButton {
+    height: 40px;
+
+    padding: 0 15px;
+
+    font-size: 11px;
+  }
+
+  .bookButton {
+    height: 40px;
+
+    padding-left: 14px;
+
+    gap: 7px;
+
+    font-size: 11px;
+  }
+
+  .bookArrow {
+    width: 31px;
+    height: 31px;
+  }
+
+  /* .navbar.scrolled .watchButton,
+  .navbar.scrolled .bookButton {
+    height: 37px;
+  }
+
+  .navbar.scrolled .bookArrow {
+    width: 29px;
+    height: 29px;
+  } */
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+  .navbar {
+    height: 72px;
+
+    padding: 0 14px;
+  }
+
+  /* .navbar.scrolled {
+    height: 62px;
+
+    padding-left: 14px;
+    padding-right: 14px;
+  } */
+
+  .brand {
+    width: 125px;
+    height: 62px;
+    margin-top: 10px;
+  }
+
+  /* .navbar.scrolled .brand {
+    width: 115px;
+    height: 54px;
+  } */
+
+  .actions {
+    gap: 5px;
+
+    padding: 5px;
+  }
+
+  /* Watch */
+
+  .watchButton {
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    gap: 0;
+  }
+
+  .watchText {
+    display: none;
+  }
+
+  .watchIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Book */
+
+  .bookButton {
+    height: 38px;
+
+    gap: 4px;
+
+    padding: 0 4px 0 10px;
+
+    font-size: 9px;
+  }
+
+  .bookArrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Scrolled */
+
+  /* .navbar.scrolled .watchButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .navbar.scrolled .bookButton {
+    height: 35px;
+
+    padding: 0 4px 0 8px;
+
+    font-size: 8px;
+  } */
+
+  .navbar.scrolled .bookArrow {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+  .navbar {
+    height: 66px;
+
+    padding: 0 10px;
+  }
+
+  /* .navbar.scrolled {
+    height: 58px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  } */
+
+  .brand {
+    width: 110px;
+    height: 56px;
+  }
+  /* 
+  .navbar.scrolled .brand {
+    width: 102px;
+    height: 50px;
+  } */
+
+  .watchButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .bookButton {
+    height: 35px;
+
+    padding-left: 8px;
+
+    font-size: 8px;
+  }
+
+  .bookArrow {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* .navbar.scrolled .watchButton {
+    width: 33px;
+    height: 33px;
+  }
+
+  .navbar.scrolled .bookButton {
+    height: 33px;
+
+    padding-left: 7px;
+
+    font-size: 7.5px;
+  }
+
+  .navbar.scrolled .bookArrow {
+    width: 26px;
+    height: 26px;
+  } */
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .brand,
+  .brand img,
+  .actions,
+  .watchButton,
+  .bookButton,
+  .bookArrow {
+    transition: none;
+  }
+}

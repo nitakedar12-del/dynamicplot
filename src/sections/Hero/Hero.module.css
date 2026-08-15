@@ -1,0 +1,694 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+
+  padding-top: 150px;
+  padding-bottom: 60px;
+
+  overflow: hidden;
+
+  background: var(--color-white);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(6, 37, 64, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 37, 64, 0.04) 1px, transparent 1px);
+
+  background-size: 80px 80px;
+
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -220px;
+  bottom: -180px;
+
+  border-radius: 50%;
+
+  background: var(--color-peach);
+
+  filter: blur(120px);
+
+  opacity: 0.3;
+}
+
+.glowSecondary {
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  left: -140px;
+  top: -100px;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  filter: blur(100px);
+
+  opacity: 0.12;
+
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  width: min(calc(100% - 100px), var(--container-width));
+
+  min-height: calc(100vh - 210px);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(400px, 0.85fr)
+    minmax(560px, 1.15fr);
+
+  align-items: center;
+
+  gap: 60px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 25px;
+
+  padding: 8px 14px 8px 9px;
+
+  border: 1px solid rgba(6, 37, 64, 0.1);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  color: var(--color-navy);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+}
+
+.eyebrowDot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  box-shadow: 0 0 0 5px rgba(242, 106, 27, 0.12);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: clamp(60px, 6vw, 94px);
+
+  line-height: 0.94;
+
+  letter-spacing: -0.03em;
+
+  font-weight: 800;
+}
+
+.title span {
+  display: block;
+}
+
+.orange {
+  color: var(--color-orange);
+}
+
+.description {
+  max-width: 560px;
+
+  margin: 30px 0;
+
+  color: rgba(6, 37, 64, 0.65);
+
+  font-size: 17px;
+
+  line-height: 1.65;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.primaryButton,
+.secondaryButton {
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 999px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.primaryButton {
+  gap: 13px;
+
+  padding: 0 7px 0 21px;
+
+  border: 0;
+
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-3px);
+}
+
+.primaryButton:hover {
+  box-shadow: 0 14px 30px rgba(6, 37, 64, 0.2);
+}
+
+.arrow {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  transition: transform 0.3s ease;
+}
+
+.primaryButton:hover .arrow {
+  transform: rotate(45deg);
+}
+
+.secondaryButton {
+  gap: 9px;
+
+  padding: 0 19px 0 7px;
+
+  border: 1px solid rgba(6, 37, 64, 0.15);
+
+  background: var(--color-white);
+
+  color: var(--color-navy);
+}
+
+.play {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(6, 37, 64, 0.12);
+
+  border-radius: 50%;
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats {
+  display: flex;
+
+  gap: 32px;
+
+  margin-top: 36px;
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stats strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.stats span {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(6, 37, 64, 0.5);
+  letter-spacing: 0.02em;
+}
+
+.visual {
+  position: relative;
+
+  min-width: 0;
+}
+
+.imageWrapper {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1.08 / 0.86;
+
+  overflow: hidden;
+
+  border-radius: 38px;
+
+  background: var(--color-navy);
+
+  box-shadow: 0 40px 90px rgba(6, 37, 64, 0.18);
+}
+
+.image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  will-change: transform;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(135deg, rgba(6, 37, 64, 0.2), transparent 60%);
+}
+
+.liveBadge {
+  position: absolute;
+
+  top: 22px;
+  left: 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 13px;
+
+  border-radius: 999px;
+
+  background: rgba(6, 37, 64, 0.82);
+
+  color: var(--color-white);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  backdrop-filter: blur(12px);
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(242, 106, 27, 0.15);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(242, 106, 27, 0.03);
+  }
+}
+
+/* =====================================================
+   MINI STAT (availability chip)
+===================================================== */
+
+.miniStat {
+  position: absolute;
+
+  top: 22px;
+  right: 22px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 10px 15px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  color: var(--color-navy);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+
+  backdrop-filter: blur(12px);
+}
+
+.miniStat strong {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.miniStat span {
+  margin-top: 2px;
+
+  color: rgba(6, 37, 64, 0.5);
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.plotCard {
+  position: absolute;
+
+  right: 22px;
+  bottom: 22px;
+
+  width: 290px;
+
+  padding: 17px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  color: var(--color-navy);
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+
+  backdrop-filter: blur(16px);
+}
+
+.plotLabel {
+  color: rgba(6, 37, 64, 0.45);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.plotCard h3 {
+  margin: 4px 0 12px;
+
+  font-size: 22px;
+}
+
+.plotCard h3 span {
+  color: var(--color-orange);
+}
+
+.plotInfo {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 7px;
+}
+
+.plotInfo div {
+  padding: 9px;
+
+  border-radius: 10px;
+
+  background: var(--color-light);
+}
+
+.plotInfo small {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: rgba(6, 37, 64, 0.45);
+
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.plotInfo strong {
+  font-size: 11px;
+}
+
+.available {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 12px;
+
+  color: #159b65;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.available span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #19b777;
+}
+
+.available svg {
+  margin-left: auto;
+
+  color: var(--color-orange);
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+  .container {
+    grid-template-columns: 1fr;
+
+    width: min(calc(100% - 50px), 850px);
+
+    gap: 50px;
+  }
+
+  .content {
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    font-size: clamp(60px, 9vw, 88px);
+  }
+
+  .description {
+    max-width: 650px;
+  }
+
+  .stats {
+    justify-content: center;
+  }
+
+  .visual {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+  .hero {
+    padding-top: 105px;
+    padding-bottom: 35px;
+  }
+
+  .container {
+    width: calc(100% - 30px);
+
+    min-height: auto;
+
+    gap: 38px;
+  }
+
+  .eyebrow {
+    margin-bottom: 18px;
+
+    font-size: 9px;
+  }
+
+  .title {
+    font-size: clamp(48px, 14vw, 68px);
+  }
+
+  .description {
+    margin: 22px 0;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+  .actions {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    height: 52px;
+
+    font-size: 12px;
+  }
+
+  .arrow,
+  .play {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stats {
+    gap: 22px;
+
+    margin-top: 26px;
+  }
+
+  .stats strong {
+    font-size: 18px;
+  }
+
+  .stats span {
+    font-size: 9px;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 0.82 / 1;
+
+    border-radius: 26px;
+  }
+
+  .liveBadge {
+    top: 14px;
+    left: 14px;
+
+    font-size: 8px;
+  }
+
+  .miniStat {
+    top: 14px;
+    right: 14px;
+
+    padding: 8px 11px;
+  }
+
+  .miniStat strong {
+    font-size: 15px;
+  }
+
+  .miniStat span {
+    font-size: 7px;
+  }
+
+  .plotCard {
+    right: 14px;
+    bottom: 14px;
+
+    width: calc(100% - 28px);
+
+    padding: 14px;
+
+    border-radius: 17px;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+  .actions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 47px;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+    gap: 18px 24px;
+
+    justify-content: center;
+  }
+}

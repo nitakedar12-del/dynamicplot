@@ -1,25 +1,13 @@
-/**
- * index.js
- * 
- * Main entry point for Plot Visualizer application.
- * This file initializes and mounts the React application.
- * 
- * @author Techgicus Software Solutions
- * @version 1.0.0
- */
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import App from "./App";
 
-// Get the root element from HTML
-const rootElement = document.getElementById('root');
+import "./styles/theme.css";
+import "./styles/global.css";
 
-// Create React root and render App component
-const root = ReactDOM.createRoot(rootElement);
-root.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

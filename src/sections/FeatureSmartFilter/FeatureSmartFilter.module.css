@@ -1,0 +1,616 @@
+/* =========================================
+   SECTION
+========================================= */
+
+.section {
+  position: relative;
+
+  width: 100%;
+
+  padding: 90px 0 100px;
+
+  background: var(--color-white);
+
+  overflow: hidden;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+  width: min(1320px, calc(100% - 80px));
+
+  margin: 0 auto;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+  max-width: 720px;
+
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 16px;
+
+  color: var(--color-orange);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+}
+
+.eyebrow::before {
+  content: "";
+
+  width: 27px;
+
+  height: 2px;
+
+  background: var(--color-orange);
+}
+
+.header h2 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: clamp(46px, 5vw, 72px);
+
+  line-height: 0.96;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 800;
+}
+
+.header h2 span {
+  color: var(--color-orange);
+}
+
+.header p {
+  max-width: 610px;
+
+  margin: 18px 0 0;
+
+  color: #71859a;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+
+  font-weight: 500;
+}
+
+/* =========================================
+   FILTER TAGS
+========================================= */
+
+.filterTags {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 30px;
+}
+
+.filterIcon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--color-navy);
+
+  color: var(--color-white);
+}
+
+.filterTag {
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 0 12px;
+
+  border: 1px solid rgba(6, 37, 64, 0.1);
+
+  border-radius: 999px;
+
+  background: #fafbfc;
+
+  color: var(--color-navy);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.filterTag:hover {
+  border-color: var(--color-orange);
+
+  background: rgba(242, 106, 27, 0.04);
+
+  transform: translateY(-2px);
+}
+
+.filterDot {
+  width: 16px;
+  height: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(242, 106, 27, 0.12);
+
+  color: var(--color-orange);
+}
+
+/* =========================================
+   WORKFLOW
+========================================= */
+
+.workflow {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    60px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 22px;
+}
+
+/* =========================================
+   WORKFLOW ITEM
+========================================= */
+
+.workflowItem {
+  min-width: 0;
+}
+
+/* =========================================
+   WORKFLOW HEADER
+========================================= */
+
+.workflowHeader {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+.workflowNumber {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+  margin-left: 100px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--color-navy);
+
+  color: var(--color-white);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.workflowItem:hover .workflowNumber {
+  background: var(--color-orange);
+
+  transform: rotate(-8deg);
+}
+
+.workflowHeader span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--color-orange);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+}
+
+.workflowHeader h3 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: 20px;
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  letter-spacing: -0.025em;
+}
+
+.imageContainer {
+  position: relative;
+
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+
+  padding: 14px; /* the only "empty space" now — a deliberate mat, not a gap */
+
+  margin: 0 auto;
+
+  border: 1px solid rgba(6, 37, 64, 0.08);
+  border-radius: 25px;
+
+  background: #f2f4f6;
+
+  box-shadow: 0 20px 50px rgba(6, 37, 64, 0.08);
+}
+/* =========================================
+   IMAGE
+========================================= */
+
+.imageContainer img {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: min(400px, 100%);
+  max-height: 620px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 18px 40px rgba(6, 37, 64, 0.16);
+
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.imageContainer:hover img {
+  transform: scale(1.015);
+}
+
+/* =========================================
+   RESULT BADGE
+========================================= */
+
+.resultBadge {
+  position: absolute;
+
+  right: 15px;
+
+  bottom: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  color: var(--color-navy);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  box-shadow: 0 10px 28px rgba(6, 37, 64, 0.16);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.resultBadge span {
+  width: 7px;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #17b978;
+
+  box-shadow: 0 0 0 4px rgba(23, 185, 120, 0.12);
+}
+
+/* =========================================
+   CONNECTOR
+========================================= */
+
+.workflowConnector {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top: 55px;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  color: var(--color-white);
+
+  box-shadow: 0 10px 25px rgba(242, 106, 27, 0.22);
+}
+
+/* =========================================
+   BOTTOM MESSAGE
+========================================= */
+
+.bottomMessage {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  width: fit-content;
+
+  margin: 28px auto 0;
+
+  padding: 8px 16px 8px 8px;
+
+  border: 1px solid rgba(6, 37, 64, 0.08);
+
+  border-radius: 999px;
+
+  background: #fafbfc;
+}
+
+.bottomIcon {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(242, 106, 27, 0.1);
+
+  color: var(--color-orange);
+}
+
+.bottomMessage span {
+  color: var(--color-navy);
+
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+  .container {
+    width: calc(100% - 60px);
+  }
+
+  .workflow {
+    grid-template-columns:
+      minmax(0, 1fr)
+      45px
+      minmax(0, 1fr);
+
+    gap: 12px;
+  }
+
+  .imageContainer {
+    padding: 12px;
+  }
+
+  .imageContainer img {
+    max-height: 520px;
+  }
+
+  .workflowHeader {
+    gap: 12px;
+  }
+
+  .workflowHeader h3 {
+    font-size: 18px;
+  }
+
+  .workflowNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+  .section {
+    padding: 75px 0 85px;
+  }
+
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .header {
+    margin-bottom: 25px;
+  }
+
+  .header h2 {
+    font-size: clamp(43px, 12vw, 58px);
+  }
+
+  .header p {
+    font-size: 14px;
+  }
+
+  .filterTags {
+    margin-bottom: 28px;
+  }
+
+  .filterIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .filterTag {
+    height: 34px;
+
+    padding: 0 10px;
+
+    font-size: 10px;
+  }
+
+  .workflow {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+
+  .workflowConnector {
+    margin: -18px auto;
+
+    transform: rotate(90deg);
+  }
+
+  .workflowHeader {
+    gap: 10px;
+  }
+
+  .workflowNumber {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+    margin-left: 50px;
+  }
+
+  .imageContainer {
+    padding: 10px;
+
+    border-radius: 21px;
+  }
+
+  .imageContainer img {
+    max-width: 100%;
+    max-height: 460px;
+
+    border-radius: 14px;
+  }
+
+  .resultBadge {
+    right: 10px;
+
+    bottom: 10px;
+
+    padding: 8px 11px;
+
+    font-size: 9px;
+  }
+
+  .bottomMessage {
+    margin-top: 28px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+  .container {
+    width: calc(100% - 26px);
+  }
+
+  .workflowNumber {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+  }
+
+  .imageContainer img {
+    max-height: 400px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .imageContainer img,
+  .filterTag,
+  .workflowNumber {
+    transition: none;
+  }
+}

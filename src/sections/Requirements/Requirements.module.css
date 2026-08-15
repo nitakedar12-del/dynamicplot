@@ -1,0 +1,994 @@
+/* =========================================
+   SECTION
+========================================= */
+
+.section {
+  position: relative;
+
+  width: 100%;
+
+  padding: 110px 0 120px;
+
+  background: var(--color-white);
+
+  overflow: hidden;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+  width: min(1320px, calc(100% - 80px));
+
+  margin: 0 auto;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+  max-width: 850px;
+
+  margin-bottom: 55px;
+}
+
+.eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 17px;
+
+  color: var(--color-orange);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+}
+
+.eyebrow span {
+  width: 28px;
+
+  height: 2px;
+
+  background: var(--color-orange);
+}
+
+.header h2 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: clamp(46px, 5.2vw, 72px);
+
+  line-height: 0.96;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 800;
+}
+
+.header h2 span {
+  color: var(--color-orange);
+}
+
+.header p {
+  max-width: 650px;
+
+  margin: 22px 0 0;
+
+  color: #71859a;
+
+  font-size: 15px;
+
+  line-height: 1.65;
+
+  font-weight: 500;
+}
+
+/* =========================================
+   REQUIREMENTS GRID
+========================================= */
+
+.requirementsGrid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+
+  margin-bottom: 28px;
+}
+
+/* =========================================
+   REQUIREMENT CARD
+========================================= */
+
+.requirementCard {
+  position: relative;
+
+  min-height: 350px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 32px;
+
+  border: 1px solid rgba(6, 37, 64, 0.09);
+
+  border-radius: 28px;
+
+  background: #fafbfc;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.requirementCard::before {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+
+  height: 180px;
+
+  right: -70px;
+
+  top: -70px;
+
+  border-radius: 50%;
+
+  background: rgba(242, 106, 27, 0.05);
+
+  transition:
+    transform 0.45s ease,
+    background 0.45s ease;
+}
+
+.requirementCard:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(242, 106, 27, 0.22);
+
+  box-shadow: 0 25px 55px rgba(6, 37, 64, 0.09);
+}
+
+.requirementCard:hover::before {
+  transform: scale(1.25);
+
+  background: rgba(242, 106, 27, 0.08);
+}
+
+/* =========================================
+   CARD TOP
+========================================= */
+
+.cardTop {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.number {
+  color: rgba(6, 37, 64, 0.28);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+}
+
+.icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-navy);
+
+  color: var(--color-white);
+
+  box-shadow: 0 12px 25px rgba(6, 37, 64, 0.13);
+
+  transition:
+    background 0.3s ease,
+    transform 0.35s ease;
+}
+
+.requirementCard:hover .icon {
+  background: var(--color-orange);
+
+  transform: rotate(-6deg);
+}
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.cardContent {
+  position: relative;
+
+  z-index: 1;
+
+  margin-top: 42px;
+}
+
+.cardLabel {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--color-orange);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+.cardContent h3 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: 32px;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.04em;
+
+  font-weight: 800;
+}
+
+.cardContent p {
+  max-width: 420px;
+
+  margin: 14px 0 0;
+
+  color: #71859a;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  font-weight: 500;
+}
+
+/* =========================================
+   TAGS
+========================================= */
+
+.tags {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: auto;
+
+  padding-top: 30px;
+}
+
+.tags span {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 8px 11px;
+
+  border: 1px solid rgba(6, 37, 64, 0.08);
+
+  border-radius: 999px;
+
+  background: var(--color-white);
+
+  color: var(--color-navy);
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+.tags svg {
+  color: #17b978;
+}
+
+/* =========================================
+   CARD ARROW
+========================================= */
+
+.cardArrow {
+  position: absolute;
+
+  right: 30px;
+
+  bottom: 30px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  color: var(--color-white);
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.requirementCard:hover .cardArrow {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+/* =========================================
+   DELIVERY
+========================================= */
+
+/* =========================================
+   DELIVERY
+========================================= */
+
+.delivery {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.85fr)
+    minmax(0, 1.4fr);
+
+  align-items: center;
+
+  gap: 35px;
+
+  padding: 26px 30px;
+
+  border: 1px solid
+    rgba(6, 37, 64, 0.08);
+
+  border-radius: 24px;
+
+  background: var(--color-navy);
+
+  box-shadow:
+    0 18px 45px
+    rgba(6, 37, 64, 0.11);
+}
+
+
+/* =========================================
+   DELIVERY INTRO
+========================================= */
+
+.deliveryIntro {
+  min-width: 0;
+}
+
+.deliveryIntro > span {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--color-orange);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+.deliveryIntro h3 {
+  max-width: 380px;
+
+  margin: 0;
+
+  color: var(--color-white);
+
+  font-size: clamp(
+    23px,
+    2.2vw,
+    31px
+  );
+
+  line-height: 1.08;
+
+  letter-spacing: -0.04em;
+
+  font-weight: 750;
+}
+
+.deliveryIntro strong {
+  color: var(--color-orange);
+
+  font-weight: 800;
+}
+
+
+/* =========================================
+   DELIVERY DETAILS
+========================================= */
+
+.deliveryDetails {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+
+/* =========================================
+   DETAIL
+========================================= */
+
+.detail {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 82px;
+
+  padding: 14px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.09);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.detail:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(242, 106, 27, 0.25);
+
+  background:
+    rgba(255, 255, 255, 0.075);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.detailIcon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(242, 106, 27, 0.12);
+
+  color: var(--color-orange);
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.detailContent {
+  min-width: 0;
+}
+
+.detailValue {
+  color: var(--color-white);
+
+  font-size: 22px;
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: -0.035em;
+}
+
+.detailValue small {
+  margin-left: 4px;
+
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0;
+}
+
+.detailContent > span {
+  display: block;
+
+  margin-top: 5px;
+
+  color:
+    rgba(255, 255, 255, 0.5);
+
+  font-size: 9px;
+
+  line-height: 1.35;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .delivery {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+
+    padding: 24px;
+  }
+
+  .deliveryIntro h3 {
+    max-width: 500px;
+  }
+
+  .deliveryDetails {
+    width: 100%;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .delivery {
+    gap: 20px;
+
+    padding: 22px 18px;
+
+    border-radius: 20px;
+  }
+
+  .deliveryIntro > span {
+    margin-bottom: 8px;
+
+    font-size: 7px;
+  }
+
+  .deliveryIntro h3 {
+    max-width: 330px;
+
+    font-size: 24px;
+
+    line-height: 1.08;
+  }
+
+  .deliveryDetails {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+  .detail {
+    min-height: 68px;
+
+    padding: 11px 12px;
+
+    border-radius: 13px;
+  }
+
+  .detailIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .detailValue {
+    font-size: 19px;
+  }
+
+  .detailValue small {
+    font-size: 8px;
+  }
+
+  .detailContent > span {
+    margin-top: 4px;
+
+    font-size: 8px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+  .delivery {
+    padding: 20px 15px;
+  }
+
+  .deliveryIntro h3 {
+    font-size: 22px;
+  }
+
+  .detail {
+    min-height: 64px;
+
+    padding: 10px;
+  }
+
+  .detailIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .detailValue {
+    font-size: 18px;
+  }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .detail {
+    transition: none;
+  }
+}
+/* =========================================
+   CTA
+========================================= */
+
+.cta {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-top: 28px;
+
+  padding: 25px 28px;
+
+  border: 1px solid rgba(242, 106, 27, 0.18);
+
+  border-radius: 22px;
+
+  background: rgba(242, 106, 27, 0.045);
+}
+
+.ctaText > span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--color-orange);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+.ctaText h3 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: 25px;
+
+  line-height: 1;
+
+  letter-spacing: -0.035em;
+
+  font-weight: 800;
+}
+
+.ctaText h3 span {
+  color: var(--color-orange);
+}
+
+/* =========================================
+   CTA BUTTON
+========================================= */
+
+.ctaButton {
+  height: 48px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  padding: 0 6px 0 20px;
+
+  border-radius: 999px;
+
+  background: var(--color-navy);
+
+  color: var(--color-white);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.ctaButton span {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  color: var(--color-white);
+
+  transition:
+    transform 0.35s ease,
+    background 0.25s ease;
+}
+
+.ctaButton:hover {
+  background: var(--color-orange);
+
+  transform: translateY(-2px);
+}
+
+.ctaButton:hover span {
+  background: var(--color-white);
+
+  color: var(--color-orange);
+
+  transform: rotate(45deg);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+  .container {
+    width: calc(100% - 60px);
+  }
+
+  .requirementsGrid {
+    gap: 16px;
+  }
+
+  .requirementCard {
+    min-height: 330px;
+
+    padding: 26px;
+  }
+
+  .delivery {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+  .section {
+    padding: 80px 0 90px;
+  }
+
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .header {
+    margin-bottom: 38px;
+  }
+
+  .header h2 {
+    font-size: clamp(43px, 12vw, 58px);
+  }
+
+  .header p {
+    font-size: 14px;
+  }
+
+  .requirementsGrid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .requirementCard {
+    min-height: 310px;
+
+    padding: 23px;
+
+    border-radius: 23px;
+  }
+
+  .cardContent {
+    margin-top: 34px;
+  }
+
+  .cardContent h3 {
+    font-size: 28px;
+  }
+
+  .cardArrow {
+    display: none;
+  }
+
+  .delivery {
+    padding: 23px;
+
+    border-radius: 22px;
+  }
+
+  .deliveryDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .detail {
+    min-height: 88px;
+  }
+
+  .cta {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding: 22px;
+
+    border-radius: 20px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+
+  .ctaButton {
+    justify-content: space-between;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+  .container {
+    width: calc(100% - 26px);
+  }
+
+  .section {
+    padding: 70px 0 80px;
+  }
+
+  .requirementCard {
+    min-height: 295px;
+
+    padding: 20px;
+  }
+
+  .icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .cardContent h3 {
+    font-size: 26px;
+  }
+
+  .delivery {
+    padding: 20px;
+  }
+
+  .detail {
+    padding: 15px;
+  }
+
+  .detailValue {
+    font-size: 24px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .requirementCard,
+  .requirementCard::before,
+  .icon,
+  .cardArrow,
+  .ctaButton,
+  .ctaButton span {
+    transition: none;
+  }
+}

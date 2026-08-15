@@ -1,0 +1,251 @@
+/* =========================================
+   FLOATING WHATSAPP
+========================================= */
+
+.whatsapp {
+  position: fixed;
+
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+
+  z-index: 999;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: linear-gradient(145deg, #29d968, #20b858);
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 28px rgba(32, 184, 88, 0.32),
+    0 2px 6px rgba(6, 37, 64, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.whatsapp:hover {
+  transform: translateY(-4px) scale(1.05);
+
+  box-shadow:
+    0 16px 36px rgba(32, 184, 88, 0.4),
+    0 4px 10px rgba(6, 37, 64, 0.14),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.whatsapp:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.whatsapp:focus-visible {
+  outline: 3px solid rgba(32, 184, 88, 0.35);
+  outline-offset: 3px;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.icon {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================================
+   PULSE
+========================================= */
+
+.pulse,
+.pulseSecondary {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 50%;
+
+  background: #25d366;
+
+  pointer-events: none;
+
+  animation: whatsappPulse 2.6s cubic-bezier(0.2, 0.7, 0.4, 1) infinite;
+}
+
+.pulseSecondary {
+  animation-delay: 1.3s;
+}
+
+
+/* =========================================
+   TOOLTIP
+========================================= */
+
+.tooltip {
+  position: absolute;
+
+  right: 70px;
+
+  top: 50%;
+
+  padding: 8px 13px;
+
+  border-radius: 8px;
+
+  background: var(--color-navy);
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translate(6px, -50%);
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: "";
+
+  position: absolute;
+
+  right: -5px;
+
+  top: 50%;
+
+  width: 9px;
+  height: 9px;
+
+  background: var(--color-navy);
+
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.whatsapp:hover .tooltip,
+.tooltipVisible {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translate(0, -50%);
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes whatsappPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .whatsapp {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+
+    width: 52px;
+    height: 52px;
+  }
+
+  .icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .tooltip {
+    display: none;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+  .whatsapp {
+    right: max(13px, env(safe-area-inset-right));
+    bottom: max(13px, env(safe-area-inset-bottom));
+
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon svg {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp {
+    transition: none;
+  }
+
+  .pulse,
+  .pulseSecondary {
+    animation: none;
+  }
+
+  .tooltip {
+    transition: none;
+  }
+}

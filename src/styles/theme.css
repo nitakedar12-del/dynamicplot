@@ -1,0 +1,15 @@
+:root {
+  /* Brand colors */
+  --color-navy: #062540;
+  --color-orange: #f26a1b;
+  --color-orange-light: #f28749;
+  --color-peach: #f2b999;
+  --color-light: #f2f2f2;
+  --color-white: #ffffff;
+
+  /* Typography */
+  --font-primary: "Manrope", sans-serif;
+
+  /* Layout */
+  --container-width: 1440px;
+}

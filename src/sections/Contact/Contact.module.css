@@ -1,0 +1,567 @@
+.contact {
+  position: relative;
+
+  padding: 30px 0;
+
+  overflow: hidden;
+
+  background: var(--color-white);
+}
+
+.container {
+  width: min(calc(100% - 80px), var(--container-width));
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    0.9fr
+    1.1fr;
+
+  gap: 100px;
+
+  align-items: center;
+}
+
+/* =====================================================
+   LEFT CONTENT
+===================================================== */
+
+.content {
+  max-width: 560px;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: var(--color-orange);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.18em;
+}
+
+.content h2 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: clamp(48px, 5vw, 76px);
+
+  line-height: 0.98;
+
+  letter-spacing: -0.06em;
+
+  font-weight: 800;
+}
+
+.content h2 span {
+  display: block;
+
+  color: var(--color-orange);
+}
+
+.description {
+  max-width: 500px;
+
+  margin: 25px 0 40px;
+
+  color: rgba(6, 37, 64, 0.62);
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+/* =====================================================
+   HIGHLIGHTS
+===================================================== */
+
+.highlights {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.highlight {
+  display: flex;
+
+  gap: 17px;
+}
+
+.number {
+  flex-shrink: 0;
+
+  color: var(--color-orange);
+
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+.highlight strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--color-navy);
+
+  font-size: 14px;
+}
+
+.highlight p {
+  margin: 0;
+
+  color: rgba(6, 37, 64, 0.5);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+/* =====================================================
+   FORM WRAPPER
+===================================================== */
+
+.formWrapper {
+  min-height: 560px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 35px;
+
+  border-radius: 30px;
+
+  background: var(--color-navy);
+
+  box-shadow: 0 35px 90px rgba(6, 37, 64, 0.16);
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form {
+  width: 100%;
+}
+
+.formHeader {
+  margin-bottom: 28px;
+}
+
+.formHeader > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--color-orange);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+}
+
+.formHeader h3 {
+  margin: 0;
+
+  color: var(--color-white);
+
+  font-size: 28px;
+
+  line-height: 1.2;
+
+  font-weight: 800;
+}
+
+/* =====================================================
+   FORM ROW
+===================================================== */
+
+.row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+}
+
+/* =====================================================
+   FIELD
+===================================================== */
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin-bottom: 17px;
+}
+
+.field label {
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  outline: none;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: var(--color-white);
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.field input {
+  height: 50px;
+
+  padding: 0 15px;
+}
+
+.field textarea {
+  min-height: 105px;
+
+  padding: 13px 15px;
+
+  resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--color-orange);
+
+  background: rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 0 0 3px rgba(242, 106, 27, 0.08);
+}
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error {
+  margin-bottom: 15px;
+
+  padding: 11px 13px;
+
+  border: 1px solid rgba(242, 106, 27, 0.25);
+
+  border-radius: 10px;
+
+  background: rgba(242, 106, 27, 0.1);
+
+  color: #ffb18a;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
+
+.submit {
+  width: 100%;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 7px 0 20px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: var(--color-orange);
+
+  color: var(--color-white);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--color-orange-light);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 30px rgba(242, 106, 27, 0.2);
+}
+
+.submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+
+  cursor: wait;
+}
+
+.submitIcon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-navy);
+
+  transition: transform 0.3s ease;
+}
+
+.submit:hover:not(:disabled) .submitIcon {
+  transform: rotate(45deg);
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loadingDot {
+  width: 20px;
+  height: 20px;
+
+  border: 2px solid rgba(255, 255, 255, 0.3);
+
+  border-top-color: var(--color-white);
+
+  border-radius: 50%;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   FORM NOTE
+===================================================== */
+
+.formNote {
+  margin: 14px 0 0;
+
+  color: rgba(255, 255, 255, 0.35);
+
+  font-size: 9px;
+
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+.success {
+  width: 100%;
+
+  padding: 30px 10px;
+
+  text-align: center;
+
+  color: var(--color-white);
+}
+
+.successIcon {
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 22px;
+
+  border-radius: 50%;
+
+  background: rgba(242, 106, 27, 0.14);
+
+  color: var(--color-orange);
+
+  box-shadow: 0 0 0 10px rgba(242, 106, 27, 0.04);
+}
+
+.success h3 {
+  margin: 0 0 10px;
+
+  font-size: 26px;
+
+  line-height: 1.2;
+}
+
+.success p {
+  max-width: 360px;
+
+  margin: 0 auto 25px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+.resetButton {
+  height: 42px;
+
+  padding: 0 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: var(--color-white);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.resetButton:hover {
+  border-color: var(--color-orange);
+
+  background: rgba(242, 106, 27, 0.1);
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+  .contact {
+    padding: 100px 0;
+  }
+
+  .container {
+    width: calc(100% - 50px);
+
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+  }
+
+  .content {
+    max-width: 700px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+  .contact {
+    padding: 80px 0;
+  }
+
+  .container {
+    width: calc(100% - 30px);
+
+    gap: 40px;
+  }
+
+  .content h2 {
+    font-size: 48px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .formWrapper {
+    min-height: auto;
+
+    padding: 22px;
+
+    border-radius: 22px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .formHeader h3 {
+    font-size: 24px;
+  }
+
+  .submit {
+    height: 54px;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+  .formWrapper {
+    padding: 18px;
+  }
+
+  .content h2 {
+    font-size: 43px;
+  }
+}

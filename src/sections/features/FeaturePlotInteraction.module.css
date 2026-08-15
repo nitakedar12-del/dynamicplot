@@ -1,0 +1,655 @@
+/* =========================================
+   SECTION
+========================================= */
+
+.section {
+  position: relative;
+
+  width: 100%;
+
+  padding: 35px 0 110px;
+
+  background: #f8fafb;
+
+  overflow: hidden;
+}
+
+.container {
+  width: min(1380px, calc(100% - 100px));
+
+  margin: 0 auto;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+  max-width: 760px;
+
+  margin-bottom: 58px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+
+  color: var(--color-orange);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+}
+
+.eyebrow::before {
+  content: "";
+
+  width: 28px;
+
+  height: 2px;
+
+  background: var(--color-orange);
+}
+
+.header h2 {
+  margin: 0;
+
+  color: var(--color-navy);
+
+  font-size: clamp(48px, 5.3vw, 76px);
+
+  line-height: 0.96;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 800;
+}
+
+.header h2 span {
+  color: var(--color-orange);
+}
+
+.header p {
+  max-width: 620px;
+
+  margin: 20px 0 0;
+
+  color: #71859a;
+
+  font-size: 16px;
+
+  line-height: 1.65;
+}
+
+/* =========================================
+   FLOW
+========================================= */
+
+.flow {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 28px;
+}
+
+/* =========================================
+   STEP
+========================================= */
+
+.step {
+  position: relative;
+
+  min-width: 0;
+}
+
+/* =========================================
+   STEP HEADER
+========================================= */
+
+.stepHeader {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 16px; /* was 14px, gives the bigger circle room */
+
+  min-height: 70px;
+
+  margin-bottom: 18px;
+}
+
+.stepNumber {
+  width: 44px; /* was 34px */
+
+  height: 44px; /* was 34px */
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--color-navy);
+
+  color: var(--color-white);
+
+  font-size: 13px; /* was 10px */
+
+  font-weight: 800;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.step:hover .stepNumber {
+  background: var(--color-orange);
+
+  transform: rotate(-8deg);
+}
+.step:hover .stepNumber {
+  background: var(--color-orange);
+
+  transform: rotate(-8deg);
+}
+
+.stepHeader h3 {
+  margin: 2px 0 5px;
+
+  color: var(--color-navy);
+
+  font-size: 19px;
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  letter-spacing: -0.025em;
+}
+
+.stepHeader p {
+  max-width: 280px;
+
+  margin: 0;
+
+  color: #8192a1;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.imageWrapper {
+  position: relative;
+
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  padding: 12px;
+
+  border-radius: 24px;
+
+  background: var(--color-white);
+
+  border: 1px solid rgba(6, 37, 64, 0.08);
+
+  box-shadow: 0 18px 45px rgba(6, 37, 64, 0.07);
+}
+
+.imageCard {
+  position: relative;
+
+  display: block;
+
+  overflow: hidden;
+
+  border-radius: 17px;
+
+  background: #eef2f5;
+}
+
+.imageCard img {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: min(360px, 100%);
+  max-height: 560px;
+
+  object-fit: contain;
+  object-position: center;
+
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.imageCard:hover img {
+  transform: scale(1.02);
+}
+
+.imageGlow {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(180deg, transparent 70%, rgba(6, 37, 64, 0.04));
+}
+
+/* =========================================
+   CONNECTOR
+========================================= */
+
+.connector {
+  position: absolute;
+
+  top: 50%;
+
+  right: -27px;
+
+  width: 26px;
+
+  height: 26px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-orange);
+
+  color: var(--color-white);
+
+  z-index: 3;
+
+  transform: translateY(-20px);
+
+  box-shadow: 0 7px 18px rgba(242, 106, 27, 0.22);
+}
+
+/* =========================================
+   BOTTOM
+========================================= */
+
+.bottom {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  width: fit-content;
+
+  margin: 40px auto 0;
+
+  padding: 10px 18px 10px 10px;
+
+  border: 1px solid rgba(6, 37, 64, 0.08);
+
+  border-radius: 999px;
+
+  background: var(--color-white);
+
+  box-shadow: 0 10px 30px rgba(6, 37, 64, 0.05);
+}
+
+.bottomIcon {
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(242, 106, 27, 0.1);
+
+  color: var(--color-orange);
+}
+
+.bottom div:last-child {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+.bottom strong {
+  color: var(--color-navy);
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+.bottom span {
+  color: #8b9aa7;
+
+  font-size: 12px;
+}
+
+/* =========================================
+   TABLET (LARGE — 851px to 1050px)
+========================================= */
+
+@media (max-width: 1050px) and (min-width: 851px) {
+  .container {
+    width: calc(100% - 60px);
+  }
+
+  .header {
+    margin-bottom: 48px;
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+
+    grid-template-columns: none;
+
+    gap: 64px;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+
+    gap: 40px;
+  }
+
+  .step:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .stepHeader {
+    flex: 1;
+    min-width: 0;
+    min-height: auto;
+
+    gap: 14px;
+
+    margin-bottom: 0;
+  }
+
+  .stepHeader p {
+    max-width: 320px;
+  }
+
+  .stepNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .imageWrapper {
+    flex-shrink: 0;
+
+    margin: 0;
+
+    padding: 10px;
+  }
+
+  .imageCard img {
+    max-width: 300px;
+    max-height: 400px;
+  }
+
+  /* Re-purpose the horizontal connector as a vertical
+     link between stacked rows instead of hiding it */
+  .connector {
+    top: auto;
+    right: auto;
+
+    left: 50%;
+    bottom: -50px;
+
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .step:last-child .connector {
+    display: none;
+  }
+}
+
+/* =========================================
+   TABLET (SMALL — 651px to 850px)
+========================================= */
+
+@media (max-width: 850px) and (min-width: 651px) {
+  .container {
+    width: calc(100% - 44px);
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .header h2 {
+    font-size: clamp(42px, 6.5vw, 58px);
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+
+    grid-template-columns: none;
+
+    gap: 52px;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+  }
+
+  .step:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .stepHeader {
+    flex: 1;
+    min-width: 0;
+    min-height: auto;
+
+    gap: 12px;
+
+    margin-bottom: 0;
+  }
+
+  .stepHeader h3 {
+    font-size: 17px;
+  }
+
+  .stepHeader p {
+    max-width: 220px;
+
+    font-size: 11.5px;
+  }
+
+  .stepNumber {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+
+  .imageWrapper {
+    flex-shrink: 0;
+
+    margin: 0;
+
+    padding: 8px;
+
+    border-radius: 18px;
+  }
+
+  .imageCard {
+    border-radius: 12px;
+  }
+
+  .imageCard img {
+    max-width: 230px;
+    max-height: 320px;
+  }
+
+  .connector {
+    width: 22px;
+    height: 22px;
+
+    top: auto;
+    right: auto;
+
+    left: 50%;
+    bottom: -38px;
+
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .step:last-child .connector {
+    display: none;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .section {
+    padding: 75px 0 85px;
+  }
+
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .header {
+    margin-bottom: 42px;
+  }
+
+  .header h2 {
+    font-size: clamp(43px, 12vw, 58px);
+  }
+
+  .header p {
+    margin-top: 18px;
+
+    font-size: 15px;
+  }
+
+  .flow {
+    gap: 35px;
+  }
+
+  .stepHeader {
+    gap: 11px;
+
+    margin-bottom: 13px;
+  }
+
+  .stepNumber {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+
+  .stepHeader h3 {
+    font-size: 18px;
+  }
+
+  .stepHeader p {
+    font-size: 11px;
+  }
+
+  .imageWrapper {
+    padding: 8px;
+
+    border-radius: 19px;
+  }
+
+  .imageCard {
+    border-radius: 13px;
+  }
+
+  .imageCard img {
+    max-width: 100%;
+    max-height: 460px;
+  }
+
+  .bottom {
+    width: 100%;
+
+    justify-content: center;
+
+    margin-top: 32px;
+
+    padding-right: 12px;
+  }
+
+  .bottom div:last-child {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+  .container {
+    width: calc(100% - 26px);
+  }
+
+  .stepNumber {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+  }
+
+  .imageCard img {
+    max-height: 400px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .imageCard,
+  .imageCard img,
+  .stepNumber {
+    transition: none;
+  }
+}
